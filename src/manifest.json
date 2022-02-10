@@ -1,6 +1,6 @@
 {
-  "name": "lastfm-graph",
-  "short_name": "lastfm-graph",
+  "name": "lastfm-similar-graph",
+  "short_name": "lastfm-similar-graph",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",

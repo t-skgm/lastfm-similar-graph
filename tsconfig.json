@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "moduleResolution": "node",
+    "outDir": "./dist/",
+    // "baseUrl": "./",
+    // "paths": {},
+    "resolveJsonModule": true,
+    "allowJs": true,
+    /* Interop Constraints */
+    // "isolatedModules": true,
+    // "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
