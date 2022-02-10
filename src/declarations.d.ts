@@ -1,4 +1,5 @@
 /// <reference types="enzyme-adapter-preact-pure" />
+/// <reference types="vite/client" />
 
 declare module '*.css' {
   interface IClassNames {

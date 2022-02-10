@@ -1,7 +1,7 @@
 import { h, FunctionComponent } from 'preact'
 import { RoutableProps } from 'preact-router'
 import { useEffect, useState } from 'preact/hooks'
-import style from './style.css'
+import style from './style.module.css'
 
 // Note: `user` comes from the URL, courtesy of our router
 const Profile: FunctionComponent<RoutableProps & { user?: string }> = ({ user }) => {

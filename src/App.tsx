@@ -7,7 +7,7 @@ import Home from './routes/home'
 import Profile from './routes/profile'
 
 const App = () => (
-  <div id="app">
+  <div>
     <Header />
     <Router>
       <Home path="/" />

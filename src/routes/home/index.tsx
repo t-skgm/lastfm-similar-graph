@@ -1,6 +1,6 @@
 import { h, FunctionComponent } from 'preact'
 import { RoutableProps } from 'preact-router'
-import style from './style.css'
+import style from './style.module.css'
 
 const Home: FunctionComponent<RoutableProps> = () => (
   <div class={style.home}>
