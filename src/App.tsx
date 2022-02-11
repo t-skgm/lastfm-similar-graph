@@ -6,6 +6,8 @@ import Auth from './routes/auth'
 import Home from './routes/home'
 import Profile from './routes/profile'
 
+console.log('========env', import.meta.env)
+
 const App = () => (
   <div>
     <Header />
