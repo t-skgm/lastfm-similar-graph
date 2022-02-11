@@ -2,35 +2,35 @@ import { createContext, FunctionComponent } from 'preact'
 import { useEffect, useState, useCallback } from 'preact/hooks'
 
 export const SessionContext = createContext<{
-  token: string | undefined
-  setToken: (token: string | undefined) => void
+  session: string | undefined
+  setSession: (token: string | undefined) => void
 }>({
-  token: undefined,
-  setToken: () => {}
+  session: undefined,
+  setSession: () => {}
 })
 
 export const SessionContextProvider: FunctionComponent = ({ children }) => {
-  const [token, setTokenState] = useState<string | undefined>(undefined)
+  const [session, setTokenState] = useState<string | undefined>(undefined)
 
   // 復帰
   useEffect(() => {
-    const savedToken = localStorage.getItem(keySessionToken)
-    if (savedToken) {
-      console.log('[session] restored!', savedToken)
-      setTokenState(savedToken)
+    const savedSession = localStorage.getItem(keySession)
+    if (savedSession) {
+      console.log('[session] restored!', savedSession)
+      setTokenState(savedSession)
     }
   }, [])
 
-  const setToken = useCallback((token: string | undefined) => {
+  const setSession = useCallback((token: string | undefined) => {
     setTokenState(token)
     if (token) {
-      localStorage.setItem(keySessionToken, token)
+      localStorage.setItem(keySession, token)
     } else {
-      localStorage.removeItem(keySessionToken)
+      localStorage.removeItem(keySession)
     }
   }, [])
 
-  return <SessionContext.Provider value={{ token, setToken }}>{children}</SessionContext.Provider>
+  return <SessionContext.Provider value={{ session, setSession }}>{children}</SessionContext.Provider>
 }
 
-export const keySessionToken = 'session:token'
+export const keySession = 'session'
