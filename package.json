@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "16"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
