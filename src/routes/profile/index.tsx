@@ -9,7 +9,7 @@ const Profile: FunctionComponent<RoutableProps & { user?: string }> = ({ user })
   const [count, setCount] = useState(10)
 
   useEffect(() => {
-    let timer = setInterval(() => setTime(Date.now()), 1000)
+    const timer = setInterval(() => setTime(Date.now()), 1000)
     return () => clearInterval(timer)
   }, [])
 

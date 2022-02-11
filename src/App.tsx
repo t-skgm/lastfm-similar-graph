@@ -1,23 +1,21 @@
 import { h } from 'preact'
 import { Router } from 'preact-router'
 import Header from './components/Header'
+import { SessionContextProvider } from './context/session'
 
 import Auth from './routes/auth'
+import AuthCallback from './routes/auth-callback'
 import Home from './routes/home'
-import Profile from './routes/profile'
-
-console.log('========env', import.meta.env)
 
 const App = () => (
-  <div>
+  <SessionContextProvider>
     <Header />
     <Router>
       <Home path="/" />
       <Auth path="/auth" />
-      <Profile path="/profile/" user="me" />
-      <Profile path="/profile/:user" />
+      <AuthCallback path="/auth/callback" />
     </Router>
-  </div>
+  </SessionContextProvider>
 )
 
 export default App
