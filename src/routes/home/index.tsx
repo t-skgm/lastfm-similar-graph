@@ -4,12 +4,13 @@ import { useContext, useState, useCallback } from 'preact/hooks'
 import style from './style.module.css'
 import { SessionContext } from '../../context/session'
 import { useLastFmClient } from '../../context/lastfmClient'
+import { LastFmMethodResponseMap } from '../../lib/LastFmClient'
 
 const Home: FunctionComponent<RoutableProps> = () => {
   const { session } = useContext(SessionContext)
   const { lastFmClient } = useLastFmClient()
   const [search, setSearch] = useState('')
-  const [res, setRes] = useState<any>(null)
+  const [resp, setResp] = useState<LastFmMethodResponseMap['artist.getSimilar'] | null>(null)
 
   const handleRequestAuth = useCallback(async () => {
     window.location.href = lastFmClient.authRequestUrl
@@ -21,8 +22,8 @@ const Home: FunctionComponent<RoutableProps> = () => {
         method: 'artist.getSimilar',
         params: { artist: search }
       })
-      setRes(res)
-      console.log('handleTestRequest', res)
+      setResp(res)
+      console.log('handleTestRequest', res.similarartists)
     } catch (e) {
       console.warn(e)
     }
@@ -54,7 +55,7 @@ const Home: FunctionComponent<RoutableProps> = () => {
           }}
         />
       </p>
-      {res && <p>{JSON.stringify(res)}</p>}
+      {resp && <p>{JSON.stringify(resp)}</p>}
     </div>
   )
 }

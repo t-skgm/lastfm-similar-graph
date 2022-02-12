@@ -1,5 +1,6 @@
 import { createContext, FunctionComponent } from 'preact'
 import { useEffect, useState, useCallback } from 'preact/hooks'
+import { useLastFmClient } from './lastfmClient'
 
 export const SessionContext = createContext<{
   session: string | undefined
@@ -10,21 +11,25 @@ export const SessionContext = createContext<{
 })
 
 export const SessionContextProvider: FunctionComponent = ({ children }) => {
-  const [session, setTokenState] = useState<string | undefined>(undefined)
+  const { lastFmClient } = useLastFmClient()
+  const [session, setSessionState] = useState<string | undefined>(undefined)
 
   // 復帰
   useEffect(() => {
     const savedSession = localStorage.getItem(keySession)
     if (savedSession) {
       console.log('[session] restored!', savedSession)
-      setTokenState(savedSession)
+      setSessionState(savedSession)
+      lastFmClient.sessionKey = savedSession
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const setSession = useCallback((token: string | undefined) => {
-    setTokenState(token)
-    if (token) {
-      localStorage.setItem(keySession, token)
+  const setSession = useCallback((session: string | undefined) => {
+    setSessionState(session)
+    lastFmClient.sessionKey = session
+    if (session) {
+      localStorage.setItem(keySession, session)
     } else {
       localStorage.removeItem(keySession)
     }
@@ -33,4 +38,4 @@ export const SessionContextProvider: FunctionComponent = ({ children }) => {
   return <SessionContext.Provider value={{ session, setSession }}>{children}</SessionContext.Provider>
 }
 
-export const keySession = 'session'
+const keySession = 'session'

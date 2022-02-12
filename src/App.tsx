@@ -8,15 +8,15 @@ import AuthCallback from './routes/auth-callback'
 import Home from './routes/home'
 
 const App = () => (
-  <SessionContextProvider>
-    <LastFmClientContextProvider>
+  <LastFmClientContextProvider>
+    <SessionContextProvider>
       <Header />
       <Router>
         <Home path="/" />
         <AuthCallback path="/auth/callback" />
       </Router>
-    </LastFmClientContextProvider>
-  </SessionContextProvider>
+    </SessionContextProvider>
+  </LastFmClientContextProvider>
 )
 
 export default App

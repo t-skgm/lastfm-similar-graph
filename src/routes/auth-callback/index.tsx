@@ -16,7 +16,7 @@ const AuthCallback: FunctionComponent<RoutableProps & QueryString> = ({ token })
   useEffect(() => {
     if (token) {
       lastFmClient
-        .request<GetSessionRes, string>({
+        .request({
           method: 'auth.getSession',
           params: { token }
         })
@@ -34,18 +34,10 @@ const AuthCallback: FunctionComponent<RoutableProps & QueryString> = ({ token })
       <p>And you got session! {session}</p>
 
       <p>
-        Go back to <Link href="/auth">auth page</Link>
+        Go back to <Link href="/">home page</Link>
       </p>
     </div>
   )
-}
-
-type GetSessionRes = {
-  session: {
-    key: string
-    name: string
-    subscriber: number
-  }
 }
 
 export default AuthCallback
