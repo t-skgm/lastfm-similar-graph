@@ -1,36 +1,32 @@
 import { h, FunctionComponent } from 'preact'
 import { RoutableProps } from 'preact-router'
-import { useContext, useState } from 'preact/hooks'
+import { useContext, useState, useCallback } from 'preact/hooks'
 import style from './style.module.css'
-import { getEnv } from '../../utils/env'
 import { SessionContext } from '../../context/session'
-import { signedFetch } from '../../lib/lastfm'
-
-const env = getEnv()
-const requestAuthUrl = 'https://www.last.fm/api/auth/?api_key='
-const hostname = env.isDev ? 'http://localhost:3000' : 'https://lastfm-similar-graph.pages.dev/'
+import { useLastFmClient } from '../../context/lastfmClient'
 
 const Home: FunctionComponent<RoutableProps> = () => {
   const { session } = useContext(SessionContext)
+  const { lastFmClient } = useLastFmClient()
   const [search, setSearch] = useState('')
   const [res, setRes] = useState<any>(null)
 
-  const handleRequestAuth = async () => {
-    const callbackUrl = `${hostname}/auth/callback`
-    window.location.href = `${requestAuthUrl}${env.LASTFM_API_KEY}&cb=${callbackUrl}`
-  }
+  const handleRequestAuth = useCallback(async () => {
+    window.location.href = lastFmClient.authRequestUrl
+  }, [lastFmClient.authRequestUrl])
 
-  const handleTestRequest = async () => {
+  const handleTestRequest = useCallback(async () => {
     try {
-      const res = await signedFetch('artist.getSimilar', {
-        artist: search
+      const res = await lastFmClient.request({
+        method: 'artist.getSimilar',
+        params: { artist: search }
       })
       setRes(res)
       console.log('handleTestRequest', res)
     } catch (e) {
       console.warn(e)
     }
-  }
+  }, [lastFmClient, search])
 
   return (
     <div class={style.home}>

@@ -7,6 +7,8 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-empty-function': 'off',
     'no-spaced-func': 'off',
-    'no-unused-vars': 'off'
+    'no-unused-vars': 'off',
+    'no-useless-constructor': 'off',
+    '@typescript-eslint/no-useless-constructor': ['error']
   }
 }

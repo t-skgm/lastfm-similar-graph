@@ -3,7 +3,7 @@ import { RoutableProps, Link } from 'preact-router'
 import { useContext, useEffect } from 'preact/hooks'
 import style from './style.module.css'
 import { SessionContext } from '../../context/session'
-import { signedFetch } from '../../lib/lastfm'
+import { useLastFmClient } from '../../context/lastfmClient'
 
 // const requestAuthUrl = 'https://www.last.fm/api/auth/?api_key='
 
@@ -11,15 +11,21 @@ type QueryString = { token?: string }
 
 const AuthCallback: FunctionComponent<RoutableProps & QueryString> = ({ token }) => {
   const { session, setSession } = useContext(SessionContext)
+  const { lastFmClient } = useLastFmClient()
 
   useEffect(() => {
     if (token) {
-      signedFetch('auth.getSession', { token }).then((res: GetSessionRes) => {
-        console.log('auth.getSession res', res)
-        setSession(res.session.key)
-      })
+      lastFmClient
+        .request<GetSessionRes, string>({
+          method: 'auth.getSession',
+          params: { token }
+        })
+        .then(res => {
+          console.log('auth.getSession res', res)
+          setSession(res.session.key)
+        })
     }
-  }, [setSession, token])
+  }, [lastFmClient, setSession, token])
 
   return (
     <div class={style.home}>
