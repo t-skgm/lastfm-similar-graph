@@ -19,7 +19,7 @@ export type LasfFmClientInput = {
 
 export type LastFmParamsMap = {
   [Method in LastFmMethod]: LastFmParamsBase<Method> & {
-    [param: string]: string | undefined
+    [param: string]: string | number | undefined
   }
 }
 
@@ -272,6 +272,7 @@ type FloorString = string
 type ImageSize = 'small' | 'medium' | 'large' | 'extralarge' | 'mega'
 
 type Image = {
+  /** Image URL */
   '#text': string
   size: ImageSize
 }

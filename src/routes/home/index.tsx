@@ -30,7 +30,7 @@ const Home: FunctionComponent<RoutableProps> = () => {
   }, [lastFmClient, search])
 
   return (
-    <div class={style.home}>
+    <div class={style.wrapper}>
       <h1>Home</h1>
       <p>This is Home page.</p>
       {session ? <p>You have session: {session}</p> : <p>You don't have session yet.</p>}

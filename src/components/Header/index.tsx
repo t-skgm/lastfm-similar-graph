@@ -9,6 +9,9 @@ const Header = () => (
       <Link activeClassName={style.active} href="/">
         Home
       </Link>
+      <Link activeClassName={style.active} href="/graph">
+        Graph
+      </Link>
     </nav>
   </header>
 )

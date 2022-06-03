@@ -8,7 +8,7 @@ const env = getEnv()
 const client = LastFmClient.create({
   apiKey: env.LASTFM_API_KEY,
   apiSecret: env.LASTFM_SECRET,
-  hostname: env.isDev ? 'http://localhost:3000' : 'https://lastfm-similar-graph.pages.dev/'
+  hostname: env.HOSTNAME
 })
 
 export const LastFmClientContext = createContext<{

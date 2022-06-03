@@ -6,6 +6,7 @@ import { SessionContextProvider } from './context/session'
 
 import AuthCallback from './routes/auth-callback'
 import Home from './routes/home'
+import Graph from './routes/graph'
 
 const App = () => (
   <LastFmClientContextProvider>
@@ -13,6 +14,7 @@ const App = () => (
       <Header />
       <Router>
         <Home path="/" />
+        <Graph path="/graph" />
         <AuthCallback path="/auth/callback" />
       </Router>
     </SessionContextProvider>
