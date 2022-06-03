@@ -52,7 +52,7 @@ export class LastFmClient implements ILasfFmClient {
   }
 }
 
-const apiRoot = 'http://ws.audioscrobbler.com/2.0/'
+const apiRoot = 'https://ws.audioscrobbler.com/2.0/'
 const authRequestUrlBase = 'https://www.last.fm/api/auth/'
 
 const _buildQueryStr = (params: LasfFmParams) => {
